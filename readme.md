@@ -16,4 +16,8 @@
 支持的数据库 
 ----
     1.mysql  
+
+如何扩展
+----
+    1.实现DbInfoDao，具体可参考MysqlDbInfoDao
     
