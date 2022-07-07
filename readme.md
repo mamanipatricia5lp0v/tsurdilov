@@ -21,3 +21,7 @@
 ----
     1.实现DbInfoDao，具体可参考MysqlDbInfoDao
     
+
+效果图
+----
+ ![例子](https://gitee.com/shiqiyue/dbDocGenerator/blob/master/doc/example.png "在这里输入图片标题")
