@@ -24,4 +24,4 @@
 
 效果图
 ----
- ![例子](https://gitee.com/shiqiyue/dbDocGenerator/blob/master/doc/example.png "在这里输入图片标题")
+ ![例子](https://gitee.com/shiqiyue/dbDocGenerator/raw/master/doc/example.png "例子")
