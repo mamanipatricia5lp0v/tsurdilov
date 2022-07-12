@@ -10,16 +10,22 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
+/***
+ * 应用测试
+ * 
+ * @author wwy
+ *
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ApplicationTests {
-
+public class ApplicationTest {
+	
 	@Autowired
 	private Optional<JdbcTemplate> jdbcTemplate;
-
+	
 	@Test
 	public void contextLoads() {
 		Assert.assertTrue(jdbcTemplate.isPresent());
 	}
-
+	
 }

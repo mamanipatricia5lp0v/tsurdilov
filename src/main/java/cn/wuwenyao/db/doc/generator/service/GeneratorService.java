@@ -23,16 +23,16 @@ import freemarker.template.Template;
  */
 @Service
 public class GeneratorService {
-
+	
 	@Autowired
 	private DbInfoDao dbInfoDao;
-
+	
 	/***
 	 * 生成数据库文件放置的位置
 	 */
 	@Value("${application.db.generator.target}")
 	private String targetFileName;
-
+	
 	/***
 	 * 生成数据库文档
 	 * 
@@ -41,18 +41,18 @@ public class GeneratorService {
 	public void generateDbDoc() throws Exception {
 		String databaseName = dbInfoDao.databaseName();
 		List<TableInfo> tableInfos = dbInfoDao.tableInfoList();
-		//获取模板
+		// 获取模板
 		Template template = FreemarkerUtils.getTemplate("dbTemplate2.ftl");
 		File file = new File(targetFileName);
-		//生成目录
+		// 生成目录
 		if (!file.getParentFile().exists()) {
 			file.getParentFile().mkdirs();
 		}
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>(2);
 		map.put("tableInfos", tableInfos);
 		map.put("databaseName", databaseName);
-		//根据模板生成文件
+		// 根据模板生成文件
 		template.process(map, new FileWriter(file));
 	}
-
+	
 }

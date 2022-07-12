@@ -5,6 +5,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+/***
+ * 应用启动
+ * 
+ * @author wwy
+ *
+ */
 @SpringBootApplication
 public class Application {
 	
