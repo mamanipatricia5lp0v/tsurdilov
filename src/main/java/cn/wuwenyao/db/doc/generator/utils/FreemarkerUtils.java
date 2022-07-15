@@ -15,6 +15,8 @@ import freemarker.template.Template;
  */
 public class FreemarkerUtils {
 	
+	private static final String COLON = ":";
+	
 	/**
 	 * 通过文件名加载模版
 	 * 
@@ -39,7 +41,7 @@ public class FreemarkerUtils {
 	public static String getClassResources() {
 		String path = (String.valueOf(Thread.currentThread().getContextClassLoader().getResource("")))
 				.replaceAll("file:/", "").replaceAll("%20", " ").trim();
-		if (path.indexOf(":") != 1) {
+		if (path.indexOf(COLON) != 1) {
 			path = File.separator + path;
 		}
 		return path;

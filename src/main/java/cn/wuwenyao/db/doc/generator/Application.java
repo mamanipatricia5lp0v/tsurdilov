@@ -1,9 +1,10 @@
 package cn.wuwenyao.db.doc.generator;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+
+import cn.wuwenyao.db.doc.generator.config.ApplicationConfig;
 
 /***
  * 应用启动
@@ -11,11 +12,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
  * @author wwy
  *
  */
+@EnableConfigurationProperties({ ApplicationConfig.class })
 @SpringBootApplication
 public class Application {
-	
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);

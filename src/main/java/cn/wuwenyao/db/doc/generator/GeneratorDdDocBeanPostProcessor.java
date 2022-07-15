@@ -17,14 +17,15 @@ import cn.wuwenyao.db.doc.generator.service.GeneratorService;
  */
 @Component
 public class GeneratorDdDocBeanPostProcessor implements ApplicationListener<ContextRefreshedEvent> {
+	
 	@Autowired
 	private GeneratorService generatorService;
-
+	
 	private static final Logger LOG = LoggerFactory.getLogger(GeneratorDdDocBeanPostProcessor.class);
-
+	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-
+		
 		// 生成doc
 		try {
 			generatorService.generateDbDoc();

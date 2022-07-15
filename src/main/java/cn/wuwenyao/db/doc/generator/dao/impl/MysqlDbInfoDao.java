@@ -5,10 +5,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
 
 import cn.wuwenyao.db.doc.generator.dao.DbInfoDao;
 import cn.wuwenyao.db.doc.generator.entity.TableFieldInfo;
@@ -20,19 +18,18 @@ import cn.wuwenyao.db.doc.generator.entity.TableInfo;
  * @author wwy
  *
  */
-@ConditionalOnProperty(name = "application.db.type", havingValue = "mysql")
-@Component
-public class MysqlDbInfoDao implements DbInfoDao {
 
+public class MysqlDbInfoDao implements DbInfoDao {
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-
+	
 	@Override
 	public String databaseName() {
 		String databaseName = jdbcTemplate.queryForObject("select database()", String.class);
 		return databaseName;
 	}
-
+	
 	@Override
 	public List<TableInfo> tableInfoList() {
 		List<TableInfo> tableInfos = jdbcTemplate.query(
@@ -47,9 +44,9 @@ public class MysqlDbInfoDao implements DbInfoDao {
 		});
 		return tableInfos;
 	}
-
+	
 	public static class TableInfoRowMapper implements RowMapper<TableInfo> {
-
+		
 		@Override
 		public TableInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
 			String tableName = rs.getString(1);
@@ -59,11 +56,11 @@ public class MysqlDbInfoDao implements DbInfoDao {
 			tableInfo.setTableName(tableName);
 			return tableInfo;
 		}
-
+		
 	}
-
+	
 	public static class TableFieldInfoRowMapper implements RowMapper<TableFieldInfo> {
-
+		
 		@Override
 		public TableFieldInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
 			TableFieldInfo tableFieldInfo = new TableFieldInfo();
@@ -79,7 +76,12 @@ public class MysqlDbInfoDao implements DbInfoDao {
 			}
 			return tableFieldInfo;
 		}
-
+		
 	}
-
+	
+	@Override
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+	
 }

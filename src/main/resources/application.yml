@@ -1,11 +1,11 @@
-application: 
-  db:
-    generator:
-      target: D:\db.doc ##生成文件放置位置
-    type: mysql ##数据库类型
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    password: '123456'
-    url: jdbc:mysql://localhost:3306/jee?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    password: 'root'
+    url: jdbc:mysql://192.168.0.195:3306/huiyou?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
     username: root
+application:
+  generator:
+    dbtype: mysql
+    target-file-type: word
+    target-file-dir: D:\generator
