@@ -4,11 +4,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import cn.wuwenyao.db.doc.generator.dao.DbInfoDao;
 import cn.wuwenyao.db.doc.generator.entity.TableFieldInfo;
 import cn.wuwenyao.db.doc.generator.entity.TableInfo;
 
@@ -19,9 +17,8 @@ import cn.wuwenyao.db.doc.generator.entity.TableInfo;
  *
  */
 
-public class MysqlDbInfoDao implements DbInfoDao {
+public final class MysqlDbInfoDao extends AbstractDbInfoDao {
 	
-	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
 	@Override

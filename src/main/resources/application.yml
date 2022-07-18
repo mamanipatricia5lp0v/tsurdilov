@@ -6,6 +6,9 @@ spring:
     username: root
 application:
   generator:
+    #数据库类型，当前支持mysql
     dbtype: mysql
-    target-file-type: word
-    target-file-dir: D:\generator
+    #生成文件的类型,当前支持excel和word
+    target-file-type: excel
+    #生成文件的目录
+    target-file-dir: D:\generator2\doc

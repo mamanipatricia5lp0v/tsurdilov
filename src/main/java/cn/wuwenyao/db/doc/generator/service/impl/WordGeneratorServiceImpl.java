@@ -11,9 +11,7 @@ import java.util.Random;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 
-import cn.wuwenyao.db.doc.generator.dao.DbInfoDao;
 import cn.wuwenyao.db.doc.generator.entity.TableInfo;
-import cn.wuwenyao.db.doc.generator.service.GeneratorService;
 import cn.wuwenyao.db.doc.generator.utils.FreemarkerUtils;
 import freemarker.template.Template;
 
@@ -23,21 +21,11 @@ import freemarker.template.Template;
  * @author wwy
  *
  */
-public class WordGeneratorServiceImpl implements GeneratorService {
-	
-	private DbInfoDao dbInfoDao;
-	
-	/** 目标文件目录 */
-	private String targetFileDir;
+public final class WordGeneratorServiceImpl extends AbstractGeneratorServiceImpl {
 	
 	/** 模板名称 */
 	private String templateFileName = "docTemplate2.ftl";
 	
-	/**
-	 * (non-Javadoc)
-	 * 
-	 * @see cn.wuwenyao.db.doc.generator.service.GeneratorService#generateDbDoc()
-	 */
 	@Override
 	public void generateDbDoc() throws Exception {
 		String databaseName = dbInfoDao.databaseName();
@@ -54,16 +42,6 @@ public class WordGeneratorServiceImpl implements GeneratorService {
 		map.put("databaseName", databaseName);
 		// 根据模板生成文件
 		template.process(map, new FileWriter(file));
-	}
-	
-	@Override
-	public void setDbInfoDao(DbInfoDao dbInfoDao) {
-		this.dbInfoDao = dbInfoDao;
-	}
-	
-	@Override
-	public void setTargetFileDir(String targetFileDir) {
-		this.targetFileDir = targetFileDir;
 	}
 	
 }

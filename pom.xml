@@ -5,7 +5,7 @@
 
 	<groupId>cn.wuwenyao</groupId>
 	<artifactId>db-doc-generator</artifactId>
-	<version>1.1-SNAPSHOT</version>
+	<version>1.1</version>
 	<packaging>jar</packaging>
 
 	<name>db-doc-generator</name>
@@ -37,7 +37,7 @@
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
 
-		
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -69,6 +69,12 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.3</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.17</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
