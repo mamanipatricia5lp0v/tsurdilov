@@ -1,6 +1,7 @@
 package cn.wuwenyao.db.doc.generator.enums;
 
 import cn.wuwenyao.db.doc.generator.service.impl.ExcelGeneratorServiceImpl;
+import cn.wuwenyao.db.doc.generator.service.impl.HtmlGeneratorServiceImpl;
 import cn.wuwenyao.db.doc.generator.service.impl.WordGeneratorServiceImpl;
 
 /***
@@ -16,7 +17,7 @@ public enum TargetFileType {
 	/** excel文档 */
 	EXCEL(ExcelGeneratorServiceImpl.class),
 	/** html文档 */
-	HTML(String.class);
+	HTML(HtmlGeneratorServiceImpl.class);
 	
 	private Class generatorServiceImpl;
 	
