@@ -24,7 +24,7 @@ import freemarker.template.Template;
 public final class WordGeneratorServiceImpl extends AbstractGeneratorServiceImpl {
 	
 	/** 模板名称 */
-	private String templateFileName = "docTemplate2.ftl";
+	private String templateFileName = "wordTemplate.ftl";
 	
 	@Override
 	public void generateDbDoc() throws Exception {

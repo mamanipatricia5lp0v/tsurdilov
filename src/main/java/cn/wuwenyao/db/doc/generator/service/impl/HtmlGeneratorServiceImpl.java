@@ -24,7 +24,7 @@ import freemarker.template.Template;
 public final class HtmlGeneratorServiceImpl extends AbstractGeneratorServiceImpl {
 	
 	/** 模板名称 */
-	private String templateFileName = "responsive.html";
+	private String templateFileName = "htmlTemplate.html";
 	
 	@Override
 	public void generateDbDoc() throws Exception {
