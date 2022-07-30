@@ -50,7 +50,7 @@ WORD效果图
  
 样例下载
 ----
-  1.[WORD样例](http://gitee.com/shiqiyue/dbDocGenerator/raw/master/doc/word-sample.doc)  
-  2.[EXCEL样例](http://gitee.com/shiqiyue/dbDocGenerator/raw/master/doc/excel-sample.xls)  
-  3.[HTML样例](http://gitee.com/shiqiyue/dbDocGenerator/raw/master/doc/html-sample.html)  
+  1.[WORD样例](http://gitee.com/shiqiyue/dbDocGenerator/tree/master/doc/word-sample.doc)  
+  2.[EXCEL样例](http://gitee.com/shiqiyue/dbDocGenerator/tree/master/doc/excel-sample.xls)  
+  3.[HTML样例](http://gitee.com/shiqiyue/dbDocGenerator/tree/master/doc/html-sample.html)  
  
