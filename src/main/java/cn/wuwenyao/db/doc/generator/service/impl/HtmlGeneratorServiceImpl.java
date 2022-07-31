@@ -16,7 +16,7 @@ import cn.wuwenyao.db.doc.generator.utils.FreemarkerUtils;
 import freemarker.template.Template;
 
 /***
- * 生成文档服务
+ * 生成文档服务-html实现
  * 
  * @author wwy
  *

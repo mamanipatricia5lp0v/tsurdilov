@@ -7,6 +7,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import cn.wuwenyao.db.doc.generator.dao.DbInfoDao;
 import cn.wuwenyao.db.doc.generator.entity.TableInfo;
 
+/***
+ * 获取数据库信息的dao实现-抽象基类
+ * 
+ * @author wwy shiqiyue.github.com
+ *
+ */
 public abstract class AbstractDbInfoDao implements DbInfoDao {
 	
 	protected JdbcTemplate jdbcTemplate;

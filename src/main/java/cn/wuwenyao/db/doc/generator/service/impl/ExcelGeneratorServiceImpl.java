@@ -23,6 +23,12 @@ import org.apache.poi.ss.usermodel.Hyperlink;
 import cn.wuwenyao.db.doc.generator.entity.TableFieldInfo;
 import cn.wuwenyao.db.doc.generator.entity.TableInfo;
 
+/***
+ * 生成文档服务-excel实现
+ * 
+ * @author wwy
+ *
+ */
 public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImpl {
 	
 	@Override
