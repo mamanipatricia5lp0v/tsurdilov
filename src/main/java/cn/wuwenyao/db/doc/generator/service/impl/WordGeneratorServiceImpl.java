@@ -16,16 +16,23 @@ import cn.wuwenyao.db.doc.generator.utils.FreemarkerUtils;
 import freemarker.template.Template;
 
 /***
- * 生成文档服务
+ * 生成文档服务,word格式
+ * <p>
+ * 格式难以控制，不再支持，版本1.5移除
+ * </p>
+ * 
+ * @deprecated
+ * 
  * 
  * @author wwy
  *
  */
+@Deprecated
 public final class WordGeneratorServiceImpl extends AbstractGeneratorServiceImpl {
-	
+
 	/** 模板名称 */
 	private String templateFileName = "wordTemplate.ftl";
-	
+
 	@Override
 	public void generateDbDoc() throws Exception {
 		String databaseName = dbInfoDao.databaseName();
@@ -43,5 +50,5 @@ public final class WordGeneratorServiceImpl extends AbstractGeneratorServiceImpl
 		// 根据模板生成文件
 		template.process(map, new FileWriter(file));
 	}
-	
+
 }
