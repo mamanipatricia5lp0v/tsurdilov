@@ -37,9 +37,9 @@
 
 	<body>
 		<!-- 目录开始 -->
-		<h1 class="ui center aligned header ">数据库名称：${databaseName}</h1>
+		<h1 id="top" class="ui center aligned header ">数据库名称：${databaseName}</h1>
 		
-		<div id="db-index" class="ui text container db-index">
+		<div  class="ui text container last db-index">
 			<h3 class="ui center aligned">目录</h3>
 			
 				<div class="ui segment">
@@ -61,12 +61,12 @@
 		<!--目录结束-->
 		<!--表说明开始-->
 		<#list tableInfos as tableInfo>
-		<div id="db-table-${tableInfo_index}" style="display: none" class="ui container db-table ">
+		<div id="db-table-${tableInfo_index}" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:${tableInfo.tableName}</h3>
 			<h3 class="ui center aligned ">注释:${tableInfo.tableRemark}</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -93,9 +93,39 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<#list tableInfo.keys as key>
+					<tr>
+						<td>${key.name}</td>
+						<td>${key.getColumnCombine()}</td>
+						<td>
+							<#if key.unique>
+								UNIQUE
+								<#else>
+								NORMAL
+							</#if>
+						</td>
+						<td>${key.indexType}</td>
+						<td>${key.indexComment}</td>
+					</tr>
+					</#list>
+				</tbody>
+
+			</table>
 		</div>
 		</#list>
-		<!--表说明结束-->
 		
 
 		<script type="text/javascript">
@@ -105,13 +135,17 @@
 				$(".db-table").hide();
 				$(".db-index").hide();
 				$("#db-table-"+id).show();
-				location.href = "#db-table-"+id;
+				toTop();
 			}
 			
 			function toIndex(){
 				$(".db-table").hide();
 				$(".db-index").show();
-				location.href = "#db-index";
+				toTop();
+			}
+			
+			function toTop(){
+				location.href = "#top";
 			}
 			
 		</script>

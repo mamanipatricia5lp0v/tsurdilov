@@ -16,7 +16,13 @@ import cn.wuwenyao.db.doc.generator.utils.FreemarkerUtils;
 import freemarker.template.Template;
 
 /***
- * 生成文档服务-word实现
+ * 生成文档服务,word格式
+ * <p>
+ * 格式难以控制，不再支持，版本1.5移除
+ * </p>
+ * 
+ * @deprecated
+ * 
  * 
  * @author wwy
  *
