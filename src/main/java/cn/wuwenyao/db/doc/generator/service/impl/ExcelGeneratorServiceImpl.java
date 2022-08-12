@@ -22,6 +22,7 @@ import org.apache.poi.ss.usermodel.Hyperlink;
 
 import cn.wuwenyao.db.doc.generator.entity.TableFieldInfo;
 import cn.wuwenyao.db.doc.generator.entity.TableInfo;
+import cn.wuwenyao.db.doc.generator.entity.TableKeyInfo;
 
 /***
  * 生成文档服务-excel实现
@@ -30,7 +31,7 @@ import cn.wuwenyao.db.doc.generator.entity.TableInfo;
  *
  */
 public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImpl {
-	
+
 	@Override
 	public void generateDbDoc() throws Exception {
 		String databaseName = dbInfoDao.databaseName();
@@ -41,7 +42,7 @@ public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImp
 		Random random = new Random();
 		String filename = DateFormatUtils.format(new Date(), "yyyy-MM-dd_hh-mm-ss") + random.nextInt(10) + ".xls";
 		File file = new File(dir, filename);
-		
+
 		HSSFWorkbook workbook = new HSSFWorkbook();
 		// 创建通用样式
 		HSSFCellStyle simpleCellStyle = workbook.createCellStyle();
@@ -57,7 +58,7 @@ public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImp
 		linkFont.setItalic(true);
 		linkFont.setUnderline(Font.U_SINGLE);
 		linkCellStyle.setFont(linkFont);
-		
+
 		CreationHelper createHelper = workbook.getCreationHelper();
 		// 创建目录sheet
 		String indexSheetName = "目录";
@@ -67,58 +68,56 @@ public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImp
 		// 创建数据库名称row
 		HSSFRow dbNameRow = indexSheet.createRow(0);
 		createCell(1, dbNameRow, "数据库名称:" + databaseName, simpleCellStyle);
-		
+
 		HSSFRow tablesRow = indexSheet.createRow(2);
 		createCell(0, tablesRow, "表", simpleCellStyle);
 		// 创建返回目录sheet的超链接
 		Hyperlink toIndexLink = createHelper.createHyperlink(HyperlinkType.DOCUMENT);
 		toIndexLink.setAddress(String.format("'%s'!A1", indexSheetName));
-		
+
 		// 创建各种表格sheet
 		for (int i = 0; i < tableInfos.size(); i++) {
 			TableInfo tableInfo = tableInfos.get(i);
-			
+
 			// 目录sheet创建一个cell超链接到表格Sheet
 			HSSFRow indexRow = indexSheet.createRow(i + 3);
 			HSSFCell indexRowCell = createCell(0, indexRow, tableInfo.getTableName(), linkCellStyle);
 			Hyperlink toTableLink = createHelper.createHyperlink(HyperlinkType.DOCUMENT);
 			toTableLink.setAddress(String.format("'%s'!A1", tableInfo.getTableName()));
 			indexRowCell.setHyperlink(toTableLink);
-			
+
 			// 创建表格sheet
 			HSSFSheet tableSheet = workbook.createSheet(tableInfo.getTableName());
 			tableSheet.setDefaultColumnWidth(45);
+			int rowIndex = 0;
 			// 创建第一行，包含返回首页的按钮和表名
-			HSSFRow tableSheetIndexRow = tableSheet.createRow(0);
+			HSSFRow tableSheetIndexRow = tableSheet.createRow(rowIndex++);
 			HSSFCell tableSheetIndexRowFirstCell = createCell(0, tableSheetIndexRow, "返回目录", linkCellStyle);
 			tableSheetIndexRowFirstCell.setHyperlink(toIndexLink);
-			
+
 			// 创建第二行，显示表名
-			HSSFRow tableSheetTableNameRow = tableSheet.createRow(1);
+			HSSFRow tableSheetTableNameRow = tableSheet.createRow(rowIndex++);
 			createCell(0, tableSheetTableNameRow, "表名：" + tableInfo.getTableName(), simpleCellStyle);
-			
+
 			// 创建第三行，注释
-			HSSFRow tableSheetTableCommentRow = tableSheet.createRow(2);
+			HSSFRow tableSheetTableCommentRow = tableSheet.createRow(rowIndex++);
 			createCell(0, tableSheetTableCommentRow, "注释：" + tableInfo.getTableRemark(), simpleCellStyle);
-			
-			// 空一行
-			tableSheet.createRow(3);
+
 			// 创建表格头部
-			HSSFRow tableSheetHeadRow = tableSheet.createRow(4);
-			
+			HSSFRow tableSheetHeadRow = tableSheet.createRow(rowIndex++);
+
 			createCell(0, tableSheetHeadRow, "字段", simpleCellStyle);
 			createCell(1, tableSheetHeadRow, "类型", simpleCellStyle);
 			createCell(2, tableSheetHeadRow, "键", simpleCellStyle);
 			createCell(3, tableSheetHeadRow, "能否为空", simpleCellStyle);
 			createCell(4, tableSheetHeadRow, "默认值", simpleCellStyle);
 			createCell(5, tableSheetHeadRow, "其他信息", simpleCellStyle);
-			
+
 			// 创建表格内容
-			
 			for (int j = 0; j < tableInfo.getFields().size(); j++) {
-				int rowIndex = j + 5;
+
 				TableFieldInfo tableFieldInfo = tableInfo.getFields().get(j);
-				HSSFRow fieldRow = tableSheet.createRow(rowIndex);
+				HSSFRow fieldRow = tableSheet.createRow(rowIndex++);
 				createCell(0, fieldRow, tableFieldInfo.getField(), simpleCellStyle);
 				createCell(1, fieldRow, tableFieldInfo.getType(), simpleCellStyle);
 				createCell(2, fieldRow, tableFieldInfo.getKey(), simpleCellStyle);
@@ -126,16 +125,39 @@ public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImp
 				createCell(4, fieldRow, tableFieldInfo.getDefaultValue(), simpleCellStyle);
 				createCell(5, fieldRow, tableFieldInfo.getExtra(), simpleCellStyle);
 			}
-			
+
+			// 空三行
+			tableSheet.createRow(rowIndex++);
+			tableSheet.createRow(rowIndex++);
+			tableSheet.createRow(rowIndex++);
+			//索引标题
+			createCell(0, tableSheet.createRow(rowIndex++), "索引信息", simpleCellStyle);
+			//索引头部
+			HSSFRow indexSheetHeadRow = tableSheet.createRow(rowIndex++);
+			createCell(0, indexSheetHeadRow, "名称", simpleCellStyle);
+			createCell(1, indexSheetHeadRow, "栏位", simpleCellStyle);
+			createCell(2, indexSheetHeadRow, "索引类型", simpleCellStyle);
+			createCell(3, indexSheetHeadRow, "索引方式", simpleCellStyle);
+			createCell(4, indexSheetHeadRow, "索引备注", simpleCellStyle);
+			//创建索引内容
+			for (int j = 0; j < tableInfo.getKeys().size(); j++) {
+				TableKeyInfo tableKeyInfo = tableInfo.getKeys().get(j);
+				HSSFRow keyRow = tableSheet.createRow(rowIndex++);
+				createCell(0, keyRow, tableKeyInfo.getName(), simpleCellStyle);
+				createCell(1, keyRow, tableKeyInfo.getColumnCombine(), simpleCellStyle);
+				createCell(2, keyRow, tableKeyInfo.getUnique() ? "Unique" : "Normal", simpleCellStyle);
+				createCell(3, keyRow, tableKeyInfo.getIndexType(), simpleCellStyle);
+				createCell(4, keyRow, tableKeyInfo.getIndexComment(), simpleCellStyle);
+			}
 		}
-		
+
 		FileOutputStream exportXls = new FileOutputStream(file);
 		workbook.write(exportXls);
 		workbook.close();
 		exportXls.close();
-		
+
 	}
-	
+
 	/***
 	 * 创建单元格
 	 * 
@@ -155,5 +177,5 @@ public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImp
 		cell.setCellStyle(style);
 		return cell;
 	}
-	
+
 }
