@@ -37,9 +37,9 @@
 
 	<body>
 		<!-- 目录开始 -->
-		<h1 class="ui center aligned header ">数据库名称：renren</h1>
+		<h1 id="top" class="ui center aligned header ">数据库名称：renren</h1>
 		
-		<div id="db-index" class="ui text container db-index">
+		<div  class="ui text container last db-index">
 			<h3 class="ui center aligned">目录</h3>
 			
 				<div class="ui segment">
@@ -190,12 +190,12 @@
 		
 		<!--目录结束-->
 		<!--表说明开始-->
-		<div id="db-table-0" style="display: none" class="ui container db-table ">
+		<div id="db-table-0" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:qrtz_blob_triggers</h3>
 			<h3 class="ui center aligned ">注释:</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -247,13 +247,47 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>SCHED_NAME</td>
+						<td>SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-1" style="display: none" class="ui container db-table ">
+		<div id="db-table-1" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:qrtz_calendars</h3>
 			<h3 class="ui center aligned ">注释:</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -296,13 +330,38 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>SCHED_NAME,CALENDAR_NAME</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-2" style="display: none" class="ui container db-table ">
+		<div id="db-table-2" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:qrtz_cron_triggers</h3>
 			<h3 class="ui center aligned ">注释:</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -363,13 +422,38 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-3" style="display: none" class="ui container db-table ">
+		<div id="db-table-3" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:qrtz_fired_triggers</h3>
 			<h3 class="ui center aligned ">注释:</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -502,13 +586,92 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>IDX_QRTZ_FT_TRIG_INST_NAME</td>
+						<td>SCHED_NAME,INSTANCE_NAME</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>IDX_QRTZ_FT_T_G</td>
+						<td>SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>IDX_QRTZ_FT_J_G</td>
+						<td>SCHED_NAME,JOB_NAME,JOB_GROUP</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>IDX_QRTZ_FT_INST_JOB_REQ_RCVRY</td>
+						<td>SCHED_NAME,INSTANCE_NAME,REQUESTS_RECOVERY</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>PRIMARY</td>
+						<td>SCHED_NAME,ENTRY_ID</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>IDX_QRTZ_FT_TG</td>
+						<td>SCHED_NAME,TRIGGER_GROUP</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>IDX_QRTZ_FT_JG</td>
+						<td>SCHED_NAME,JOB_GROUP</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-4" style="display: none" class="ui container db-table ">
+		<div id="db-table-4" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:qrtz_job_details</h3>
 			<h3 class="ui center aligned ">注释:</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -614,13 +777,56 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>IDX_QRTZ_J_GRP</td>
+						<td>SCHED_NAME,JOB_GROUP</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>PRIMARY</td>
+						<td>SCHED_NAME,JOB_NAME,JOB_GROUP</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>IDX_QRTZ_J_REQ_RECOVERY</td>
+						<td>SCHED_NAME,REQUESTS_RECOVERY</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-5" style="display: none" class="ui container db-table ">
+		<div id="db-table-5" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:qrtz_locks</h3>
 			<h3 class="ui center aligned ">注释:</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -654,13 +860,38 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>SCHED_NAME,LOCK_NAME</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-6" style="display: none" class="ui container db-table ">
+		<div id="db-table-6" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:qrtz_paused_trigger_grps</h3>
 			<h3 class="ui center aligned ">注释:</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -694,13 +925,38 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>SCHED_NAME,TRIGGER_GROUP</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-7" style="display: none" class="ui container db-table ">
+		<div id="db-table-7" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:qrtz_scheduler_state</h3>
 			<h3 class="ui center aligned ">注释:</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -752,13 +1008,38 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>SCHED_NAME,INSTANCE_NAME</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-8" style="display: none" class="ui container db-table ">
+		<div id="db-table-8" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:qrtz_simple_triggers</h3>
 			<h3 class="ui center aligned ">注释:</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -828,13 +1109,38 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-9" style="display: none" class="ui container db-table ">
+		<div id="db-table-9" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:qrtz_simprop_triggers</h3>
 			<h3 class="ui center aligned ">注释:</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -976,13 +1282,38 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-10" style="display: none" class="ui container db-table ">
+		<div id="db-table-10" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:qrtz_triggers</h3>
 			<h3 class="ui center aligned ">注释:</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -1142,13 +1473,146 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>IDX_QRTZ_T_N_STATE</td>
+						<td>SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP,TRIGGER_STATE</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>IDX_QRTZ_T_NEXT_FIRE_TIME</td>
+						<td>SCHED_NAME,NEXT_FIRE_TIME</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>IDX_QRTZ_T_C</td>
+						<td>SCHED_NAME,CALENDAR_NAME</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>IDX_QRTZ_T_G</td>
+						<td>SCHED_NAME,TRIGGER_GROUP</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>IDX_QRTZ_T_J</td>
+						<td>SCHED_NAME,JOB_NAME,JOB_GROUP</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>PRIMARY</td>
+						<td>SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>IDX_QRTZ_T_JG</td>
+						<td>SCHED_NAME,JOB_GROUP</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>IDX_QRTZ_T_N_G_STATE</td>
+						<td>SCHED_NAME,TRIGGER_GROUP,TRIGGER_STATE</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>IDX_QRTZ_T_NFT_ST</td>
+						<td>SCHED_NAME,TRIGGER_STATE,NEXT_FIRE_TIME</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>IDX_QRTZ_T_NFT_ST_MISFIRE</td>
+						<td>SCHED_NAME,MISFIRE_INSTR,NEXT_FIRE_TIME,TRIGGER_STATE</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>IDX_QRTZ_T_STATE</td>
+						<td>SCHED_NAME,TRIGGER_STATE</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>IDX_QRTZ_T_NFT_MISFIRE</td>
+						<td>SCHED_NAME,MISFIRE_INSTR,NEXT_FIRE_TIME</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>IDX_QRTZ_T_NFT_ST_MISFIRE_GRP</td>
+						<td>SCHED_NAME,MISFIRE_INSTR,NEXT_FIRE_TIME,TRIGGER_GROUP,TRIGGER_STATE</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-11" style="display: none" class="ui container db-table ">
+		<div id="db-table-11" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:schedule_job</h3>
 			<h3 class="ui center aligned ">注释:定时任务</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -1236,13 +1700,38 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>job_id</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-12" style="display: none" class="ui container db-table ">
+		<div id="db-table-12" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:schedule_job_log</h3>
 			<h3 class="ui center aligned ">注释:定时任务日志</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -1339,13 +1828,47 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>log_id</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>job_id</td>
+						<td>job_id</td>
+						<td>
+								NORMAL
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-13" style="display: none" class="ui container db-table ">
+		<div id="db-table-13" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:sys_config</h3>
 			<h3 class="ui center aligned ">注释:系统配置信息表</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -1406,13 +1929,47 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>id</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>key</td>
+						<td>key</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-14" style="display: none" class="ui container db-table ">
+		<div id="db-table-14" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:sys_log</h3>
 			<h3 class="ui center aligned ">注释:系统日志</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -1500,13 +2057,38 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>id</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-15" style="display: none" class="ui container db-table ">
+		<div id="db-table-15" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:sys_menu</h3>
 			<h3 class="ui center aligned ">注释:菜单管理</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -1594,13 +2176,38 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>menu_id</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-16" style="display: none" class="ui container db-table ">
+		<div id="db-table-16" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:sys_oss</h3>
 			<h3 class="ui center aligned ">注释:文件上传</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -1643,13 +2250,38 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>id</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-17" style="display: none" class="ui container db-table ">
+		<div id="db-table-17" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:sys_role</h3>
 			<h3 class="ui center aligned ">注释:角色</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -1710,13 +2342,38 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>role_id</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-18" style="display: none" class="ui container db-table ">
+		<div id="db-table-18" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:sys_role_menu</h3>
 			<h3 class="ui center aligned ">注释:角色与菜单对应关系</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -1759,13 +2416,38 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>id</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-19" style="display: none" class="ui container db-table ">
+		<div id="db-table-19" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:sys_user</h3>
 			<h3 class="ui center aligned ">注释:系统用户</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -1862,13 +2544,47 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>user_id</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>username</td>
+						<td>username</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-20" style="display: none" class="ui container db-table ">
+		<div id="db-table-20" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:sys_user_role</h3>
 			<h3 class="ui center aligned ">注释:用户与角色对应关系</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -1911,13 +2627,38 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>id</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-21" style="display: none" class="ui container db-table ">
+		<div id="db-table-21" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:sys_user_token</h3>
 			<h3 class="ui center aligned ">注释:系统用户Token</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -1969,13 +2710,47 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>user_id</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>token</td>
+						<td>token</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<div id="db-table-22" style="display: none" class="ui container db-table ">
+		<div id="db-table-22" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:tb_user</h3>
 			<h3 class="ui center aligned ">注释:用户</h3>
 			<h3 class="ui center aligned " ><a onclick="toIndex()">返回目录</a></h3>
-
 			<table class="ui orange celled   table">
+				<caption>表格信息</caption>
 				<thead>
 					<tr>
 						<th>字段</th>
@@ -2036,8 +2811,41 @@
 				</tbody>
 
 			</table>
+			
+			<table class="ui orange celled   table">
+				<caption>索引信息</caption>
+				<thead>
+					<tr>
+						<th>名称</th>
+						<th>栏位</th>
+						<th>索引类型</th>
+						<th>索引方式</th>
+						<th>索引备注</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>PRIMARY</td>
+						<td>user_id</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>username</td>
+						<td>username</td>
+						<td>
+								UNIQUE
+						</td>
+						<td>BTREE</td>
+						<td></td>
+					</tr>
+				</tbody>
+
+			</table>
 		</div>
-		<!--表说明结束-->
 		
 
 		<script type="text/javascript">
@@ -2047,13 +2855,17 @@
 				$(".db-table").hide();
 				$(".db-index").hide();
 				$("#db-table-"+id).show();
-				location.href = "#db-table-"+id;
+				toTop();
 			}
 			
 			function toIndex(){
 				$(".db-table").hide();
 				$(".db-index").show();
-				location.href = "#db-index";
+				toTop();
+			}
+			
+			function toTop(){
+				location.href = "#top";
 			}
 			
 		</script>
