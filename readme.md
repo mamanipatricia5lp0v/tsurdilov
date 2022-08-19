@@ -44,7 +44,7 @@
 	3.v1.2，支持生成html文档
 	4.v1.3,增加索引信息的生成
 	
-WORD效果图
+效果图
 ----
  ![Excel例子](https://gitee.com/shiqiyue/dbDocGenerator/raw/master/doc/excel.gif "例子")
  ![Html例子](https://gitee.com/shiqiyue/dbDocGenerator/raw/master/doc/html.gif "例子")
