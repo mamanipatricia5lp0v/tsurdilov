@@ -47,7 +47,11 @@
 						<#list tableInfos as tableInfo>
 						<div class="item">
 							<div class="content">
-								<a onclick="toTable(${tableInfo_index})">${tableInfo_index+1}. ${tableInfo.tableName}</a>
+								<a onclick="toTable(${tableInfo_index})">${tableInfo_index+1}. ${tableInfo.tableName}
+									<#if tableInfo.tableRemark?default("")?trim?length gt 1>
+									(${tableInfo.tableRemark})
+									</#if>
+								</a>
 							</div>
 						</div>
 						
