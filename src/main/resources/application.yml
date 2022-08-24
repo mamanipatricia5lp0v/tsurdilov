@@ -9,6 +9,6 @@ application:
     #数据库类型，当前支持mysql
     dbtype: mysql
     #生成文件的类型,当前支持excel和word和html
-    target-file-type: excel
+    target-file-type: html
     #生成文件的目录
     target-file-dir: D:\generator2\doc
