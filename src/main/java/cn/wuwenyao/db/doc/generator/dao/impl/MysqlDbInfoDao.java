@@ -47,7 +47,7 @@ public final class MysqlDbInfoDao extends AbstractDbInfoDao {
             return tableInfos;
         }
         CountDownLatch countDownLatch = new CountDownLatch(tableInfos.size());
-        ExecutorService executor = new ThreadPoolExecutor(tableInfos.size(), tableInfos.size(),
+        ExecutorService executor = new ThreadPoolExecutor(10, 10,
                 0L, TimeUnit.MILLISECONDS,
                 new LinkedBlockingQueue<Runnable>());
         tableInfos.stream().forEach((tableInfo) -> {

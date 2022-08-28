@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 
 import cn.wuwenyao.db.doc.generator.entity.TableInfo;
@@ -37,8 +38,9 @@ public final class WordGeneratorServiceImpl extends AbstractGeneratorServiceImpl
 		String databaseName = dbInfoDao.databaseName();
 		List<TableInfo> tableInfos = dbInfoDao.tableInfoList();
 		// 获取模板
+		templateFileName = StringUtils.defaultIfBlank(generatorConfig.getTemplateFilePath(), templateFileName);
 		Template template = FreemarkerUtils.getTemplate(templateFileName);
-		File dir = new File(targetFileDir);
+		File dir = new File(generatorConfig.getTargetFileDir());
 		FileUtils.forceMkdir(dir);
 		Random random = new Random();
 		String filename = DateFormatUtils.format(new Date(), "yyyy-MM-dd_hh-mm-ss") + random.nextInt(10) + ".doc";

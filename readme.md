@@ -48,6 +48,7 @@
 ----
  ![Excel例子](https://gitee.com/shiqiyue/dbDocGenerator/raw/master/doc/excel.gif "例子")
  ![Html例子](https://gitee.com/shiqiyue/dbDocGenerator/raw/master/doc/html.gif "例子")
+ ![Html例子](https://gitee.com/shiqiyue/dbDocGenerator/raw/master/doc/html-menu.gif "例子")
 样例下载
 ----
   1.[WORD样例](http://gitee.com/shiqiyue/dbDocGenerator/tree/master/doc/word-sample.doc)  

@@ -17,7 +17,9 @@ public enum TargetFileType {
 	/** excel文档 */
 	EXCEL(ExcelGeneratorServiceImpl.class),
 	/** html文档 */
-	HTML(HtmlGeneratorServiceImpl.class);
+	HTML(HtmlGeneratorServiceImpl.class)
+
+	;
 	
 	private Class generatorServiceImpl;
 	

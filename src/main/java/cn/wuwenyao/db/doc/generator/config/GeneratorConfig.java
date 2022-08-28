@@ -25,6 +25,11 @@ public class GeneratorConfig {
 	 * 生成文件目录
 	 */
 	private String targetFileDir = "";
+
+	/***
+	 * 模板文件地址
+	 */
+	private String templateFilePath = "";
 	
 	public DbType getDbtype() {
 		return dbtype;
@@ -49,5 +54,13 @@ public class GeneratorConfig {
 	public void setTargetFileDir(String targetFileDir) {
 		this.targetFileDir = targetFileDir;
 	}
-	
+
+
+	public String getTemplateFilePath() {
+		return templateFilePath;
+	}
+
+	public void setTemplateFilePath(String templateFilePath) {
+		this.templateFilePath = templateFilePath;
+	}
 }

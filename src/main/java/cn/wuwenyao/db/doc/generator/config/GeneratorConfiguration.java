@@ -36,7 +36,7 @@ public class GeneratorConfiguration {
 		GeneratorService generatorService = (GeneratorService) applicationConfig.getGenerator().getTargetFileType()
 				.getGeneratorServiceImpl().newInstance();
 		generatorService.setDbInfoDao(dbInfoDao);
-		generatorService.setTargetFileDir(applicationConfig.getGenerator().getTargetFileDir());
+		generatorService.setGeneratorConfig(applicationConfig.getGenerator());
 		return generatorService;
 	}
 	

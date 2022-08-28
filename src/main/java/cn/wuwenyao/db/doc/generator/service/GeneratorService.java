@@ -1,5 +1,6 @@
 package cn.wuwenyao.db.doc.generator.service;
 
+import cn.wuwenyao.db.doc.generator.config.GeneratorConfig;
 import cn.wuwenyao.db.doc.generator.dao.DbInfoDao;
 
 /***
@@ -25,10 +26,10 @@ public interface GeneratorService {
 	public void setDbInfoDao(DbInfoDao dbInfoDao);
 	
 	/***
-	 * 设置目标目录
+	 * 设置配置信息
 	 * 
-	 * @param targetFileDir
+	 * @param generatorConfig
 	 */
-	public void setTargetFileDir(String targetFileDir);
+	public void setGeneratorConfig(GeneratorConfig generatorConfig);
 	
 }

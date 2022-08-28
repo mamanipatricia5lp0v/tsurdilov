@@ -37,7 +37,7 @@ public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImp
 		String databaseName = dbInfoDao.databaseName();
 		List<TableInfo> tableInfos = dbInfoDao.tableInfoList();
 		// 生成文件
-		File dir = new File(targetFileDir);
+		File dir = new File(generatorConfig.getTargetFileDir());
 		FileUtils.forceMkdir(dir);
 		Random random = new Random();
 		String filename = DateFormatUtils.format(new Date(), "yyyy-MM-dd_hh-mm-ss") + random.nextInt(10) + ".xls";
