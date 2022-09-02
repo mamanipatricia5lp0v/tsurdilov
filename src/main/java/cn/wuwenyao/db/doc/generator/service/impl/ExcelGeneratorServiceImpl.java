@@ -1,36 +1,20 @@
 package cn.wuwenyao.db.doc.generator.service.impl;
 
+import cn.wuwenyao.db.doc.generator.entity.TableFieldInfo;
+import cn.wuwenyao.db.doc.generator.entity.TableInfo;
+import cn.wuwenyao.db.doc.generator.entity.TableKeyInfo;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.poi.common.usermodel.HyperlinkType;
+import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.VerticalAlignment;
-import org.apache.poi.ss.usermodel.FillPatternType;
-import org.apache.poi.ss.usermodel.BorderStyle;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.time.DateFormatUtils;
-import org.apache.poi.common.usermodel.HyperlinkType;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFFont;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.CreationHelper;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.Hyperlink;
-
-import cn.wuwenyao.db.doc.generator.entity.TableFieldInfo;
-import cn.wuwenyao.db.doc.generator.entity.TableInfo;
-import cn.wuwenyao.db.doc.generator.entity.TableKeyInfo;
-
-import static org.apache.poi.hssf.record.cf.BorderFormatting.BORDER_THIN;
 
 /***
  * 生成文档服务-excel实现
@@ -64,12 +48,8 @@ public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImp
         titleCellStyle.setBorderTop(BorderStyle.THIN);
         titleCellStyle.setBorderBottom(BorderStyle.THIN);
         titleCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        //颜色对照表：https://www.cnblogs.com/haha12/p/4353602.html
-		titleCellStyle.setFillForegroundColor(HSSFColor.HSSFColorPredefined.CORAL.getIndex());
-//		titleCellStyle.setFillBackgroundColor(HSSFColor.HSSFColorPredefined.RED.getIndex2());
-//        titleCellStyle.setFillBackgroundColor((short) 16);
+        titleCellStyle.setFillForegroundColor(HSSFColor.HSSFColorPredefined.CORAL.getIndex());
 
-//        titleCellStyle.setFillForegroundColor((short) 16);
 
         HSSFCellStyle simpleCellStyle = workbook.createCellStyle();
         simpleCellStyle.setBorderLeft(BorderStyle.THIN);
@@ -78,7 +58,6 @@ public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImp
         simpleCellStyle.setBorderBottom(BorderStyle.THIN);
 
         HSSFFont simpleFont = workbook.createFont();
-//		simpleFont.setFontName("Constantia");
         simpleFont.setFontName("微软雅黑");
         simpleFont.setFontHeightInPoints((short) 16);
         simpleCellStyle.setFont(simpleFont);
@@ -90,11 +69,9 @@ public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImp
         linkCellStyle.setBorderTop(BorderStyle.THIN);
         linkCellStyle.setBorderBottom(BorderStyle.THIN);
         HSSFFont linkFont = workbook.createFont();
-//		linkFont.setFontName("Constantia");
         linkFont.setFontName("YAHEI");
         linkFont.setFontHeightInPoints((short) 16);
         linkFont.setItalic(true);
-//		linkFont.setUnderline(Font.U_SINGLE);
         linkCellStyle.setFont(linkFont);
 
         CreationHelper createHelper = workbook.getCreationHelper();
@@ -111,7 +88,6 @@ public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImp
         createCell(0, tablesRow, "表", simpleCellStyle);
         // 创建返回目录sheet的超链接
         Hyperlink toIndexLink = createHelper.createHyperlink(HyperlinkType.DOCUMENT);
-//		Hyperlink toIndexLink = createHelper.createHyperlink(HyperlinkType.URL);
         toIndexLink.setAddress(String.format("'%s'!A1", indexSheetName));
 
         // 创建各种表格sheet
@@ -126,7 +102,7 @@ public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImp
             indexRowCell.setHyperlink(toTableLink);
             HSSFCell indexRowCell2 = createCell(1, indexRow, tableInfo.getTableRemark(), linkCellStyle);
 
-            // 创建表格sheet
+            // 创建表格sheet,sheet名称长度最大32个字符
             HSSFSheet tableSheet = workbook.createSheet(tableInfo.getTableName());
             tableSheet.setDefaultColumnWidth(45);
             int rowIndex = 0;
@@ -152,7 +128,6 @@ public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImp
             createCell(3, tableSheetHeadRow, "键", titleCellStyle);
             createCell(4, tableSheetHeadRow, "能否为空", titleCellStyle);
             createCell(5, tableSheetHeadRow, "默认值", titleCellStyle);
-//			createCell(5, tableSheetHeadRow, "其他信息", simpleCellStyle);
 
             // 创建表格内容
             for (int j = 0; j < tableInfo.getFields().size(); j++) {
@@ -165,7 +140,6 @@ public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImp
                 createCell(3, fieldRow, tableFieldInfo.getKey(), simpleCellStyle);
                 createCell(4, fieldRow, tableFieldInfo.getNullAble(), simpleCellStyle);
                 createCell(5, fieldRow, tableFieldInfo.getDefaultValue(), simpleCellStyle);
-//				createCell(5, fieldRow, tableFieldInfo.getExtra(), simpleCellStyle);
             }
 
             // 空三行
