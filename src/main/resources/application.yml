@@ -14,3 +14,9 @@ application:
     template-file-path: htmlTemplate2.html
     #生成文件的目录
     target-file-dir: D:\generator2\doc
+    #黑名单，支持正则表达式
+    blacklist:
+      - '.*'
+    #白名单，支持正则表达式
+    whitelist:
+      - 't_.*'

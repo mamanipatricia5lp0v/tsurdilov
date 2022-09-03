@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 /***
  * 获取mysql数据库信息
@@ -27,7 +28,6 @@ import java.util.concurrent.*;
 
 public final class MysqlDbInfoDao extends AbstractDbInfoDao {
 
-    private JdbcTemplate jdbcTemplate;
 
     private static final Logger logger = LoggerFactory.getLogger(MysqlDbInfoDao.class);
 
@@ -46,6 +46,11 @@ public final class MysqlDbInfoDao extends AbstractDbInfoDao {
         if (CollectionUtils.isEmpty(tableInfos)) {
             return tableInfos;
         }
+        //过滤黑名单
+        tableInfos = tableInfos.stream().filter(tableInfo -> {
+            return isTableGenerate(tableInfo.getTableName());
+        }).collect(Collectors.toList());
+        //查询表-列信息
         CountDownLatch countDownLatch = new CountDownLatch(tableInfos.size());
         ExecutorService executor = new ThreadPoolExecutor(10, 10,
                 0L, TimeUnit.MILLISECONDS,
@@ -56,7 +61,7 @@ public final class MysqlDbInfoDao extends AbstractDbInfoDao {
         try {
             countDownLatch.await();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            logger.error("countDownLatch error", e);
         }
         executor.shutdown();
         return tableInfos;
@@ -156,9 +161,5 @@ public final class MysqlDbInfoDao extends AbstractDbInfoDao {
 
     }
 
-    @Override
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
 }

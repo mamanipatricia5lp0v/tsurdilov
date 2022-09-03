@@ -27,6 +27,7 @@ public class GeneratorConfiguration {
 	public DbInfoDao dbInfoDao() throws InstantiationException, IllegalAccessException {
 		DbInfoDao dbInfoDao = (DbInfoDao) applicationConfig.getGenerator().getDbtype().getDbInfoDaoImpl().newInstance();
 		dbInfoDao.setJdbcTemplate(jdbcTemplate);
+		dbInfoDao.setApplicationConfig(applicationConfig);
 		return dbInfoDao;
 	}
 	
