@@ -15,8 +15,8 @@ application:
     #生成文件的目录
     target-file-dir: D:\generator2\doc
     #黑名单，支持正则表达式
-    blacklist:
-      - '.*'
+    #blacklist:
+    #  - '.*'
     #白名单，支持正则表达式
-    whitelist:
-      - 't_.*'
+    #whitelist:
+    #  - 't_.*'
