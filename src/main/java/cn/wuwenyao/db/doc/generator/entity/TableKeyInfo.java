@@ -10,7 +10,10 @@ import org.apache.commons.lang3.StringUtils;
  * @author wwy
  *
  */
-public class TableKeyInfo {
+public class TableKeyInfo implements Comparable{
+
+	public static final String PRIMARY_KEY = "PRIMARY";
+
 
 	/***
 	 * 索引名称
@@ -85,4 +88,19 @@ public class TableKeyInfo {
 		this.indexComment = indexComment;
 	}
 
+	@Override
+	public int compareTo(Object o) {
+		if(this.equals(o)){
+			return 0;
+		}
+		TableKeyInfo keyInfo2 = (TableKeyInfo) o;
+		String name2 = keyInfo2.getName();
+		if(PRIMARY_KEY.equalsIgnoreCase(this.name)){
+			return -1;
+		}
+		if(PRIMARY_KEY.equalsIgnoreCase(name2)){
+			return 1;
+		}
+		return this.name.compareTo(name2);
+	}
 }

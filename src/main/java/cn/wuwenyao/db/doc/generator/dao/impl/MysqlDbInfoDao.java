@@ -72,6 +72,7 @@ public final class MysqlDbInfoDao extends AbstractDbInfoDao {
      */
     public static class GetTableInfoTask implements Runnable {
 
+
         private TableInfo tableInfo;
 
         private CountDownLatch countDownLatch;
@@ -96,6 +97,7 @@ public final class MysqlDbInfoDao extends AbstractDbInfoDao {
             //查询索引信息
             List<Map<String, Object>> rawKeyInfos = jdbcTemplate.query("show keys from " + tableInfo.getTableName(),
                     new ColumnMapRowMapper());
+
             Map<String, TableKeyInfo> keyMap = new HashMap<>(5);
             for (Map<String, Object> rawKeyInfo : rawKeyInfos) {
                 TableKeyInfo tableKeyInfo = keyMap.get(rawKeyInfo.get("Key_name").toString());
@@ -114,12 +116,15 @@ public final class MysqlDbInfoDao extends AbstractDbInfoDao {
                 }
                 keyMap.put(rawKeyInfo.get("Key_name").toString(), tableKeyInfo);
             }
-            tableInfo.setKeys(new ArrayList<>(keyMap.values()));
+            List<TableKeyInfo> tableKeyInfoList = new ArrayList<>(keyMap.values());
+            tableKeyInfoList.sort(null);
+            tableInfo.setKeys(tableKeyInfoList);
             logger.info("表：{}信息查询完毕", tableInfo.getTableName());
             countDownLatch.countDown();
         }
 
     }
+
 
     /***
      * 表信息RowMapper
