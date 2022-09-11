@@ -116,6 +116,7 @@ public final class MysqlDbInfoDao extends AbstractDbInfoDao {
                 }
                 keyMap.put(rawKeyInfo.get("Key_name").toString(), tableKeyInfo);
             }
+            //索引信息进行排序
             List<TableKeyInfo> tableKeyInfoList = new ArrayList<>(keyMap.values());
             tableKeyInfoList.sort(null);
             tableInfo.setKeys(tableKeyInfoList);
