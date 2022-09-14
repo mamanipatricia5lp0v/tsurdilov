@@ -171,7 +171,8 @@ public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImp
         workbook.write(exportXls);
         workbook.close();
         exportXls.close();
-
+        // 弹出目标文件夹
+        Runtime.getRuntime().exec("explorer "+ generatorConfig.getTargetFileDir());
     }
 
     /***
