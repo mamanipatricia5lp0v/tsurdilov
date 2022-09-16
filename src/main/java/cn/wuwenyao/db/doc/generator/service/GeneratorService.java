@@ -10,6 +10,13 @@ import cn.wuwenyao.db.doc.generator.dao.DbInfoDao;
  *
  */
 public interface GeneratorService {
+
+
+	/***
+	 * 生成
+	 * @throws Exception
+	 */
+	void generate() throws Exception;
 	
 	/***
 	 * 生成数据库文档

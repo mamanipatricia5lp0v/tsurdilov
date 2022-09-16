@@ -50,8 +50,6 @@ public final class WordGeneratorServiceImpl extends AbstractGeneratorServiceImpl
 		map.put("databaseName", databaseName);
 		// 根据模板生成文件
 		template.process(map, new FileWriter(file));
-		// 弹出目标文件夹
-		Runtime.getRuntime().exec("explorer "+ generatorConfig.getTargetFileDir());
 	}
 	
 }

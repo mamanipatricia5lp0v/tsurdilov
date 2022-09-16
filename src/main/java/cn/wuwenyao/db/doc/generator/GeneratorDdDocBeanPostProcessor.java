@@ -28,7 +28,7 @@ public class GeneratorDdDocBeanPostProcessor implements ApplicationListener<Cont
 		
 		// 生成doc
 		try {
-			generatorService.generateDbDoc();
+			generatorService.generate();
 		} catch (Exception e) {
 			LOG.error("生成数据库文档错误", e);
 			return;
