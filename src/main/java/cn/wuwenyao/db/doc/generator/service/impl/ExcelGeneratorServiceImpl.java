@@ -12,7 +12,6 @@ import org.apache.poi.ss.usermodel.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -25,44 +24,71 @@ import java.util.Random;
  */
 public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImpl {
 
-    // excel文档
-    private HSSFWorkbook workbook;
-    // 创建标题样式
-    private HSSFCellStyle titleCellStyle;
-    // 创建一般样式
-    private HSSFCellStyle simpleCellStyle;
-    // 创建超链接样式
-    private HSSFCellStyle linkCellStyle;
-    //
-    private CreationHelper createHelper;
-    // 目录sheet
-    private HSSFSheet indexSheet;
-    // 创建返回目录sheet的超链接
-    private Hyperlink toIndexLink;
-
-    private String indexName = "目录";
-
-
     @Override
     public void generateDbDoc() throws Exception {
         String databaseName = dbInfoDao.databaseName();
         List<TableInfo> tableInfos = dbInfoDao.tableInfoList();
         // 生成文件
-        File file = createFile();
-        workbook = new HSSFWorkbook();
-        // 创建标题样式
-        titleCellStyle = getTitleCellStyle();
-        // 创建一般样式
-        simpleCellStyle = getSimpleCellStyle();
+        File dir = new File(generatorConfig.getTargetFileDir());
+        FileUtils.forceMkdir(dir);
+        Random random = new Random();
+        String filename = databaseName + "_" + DateFormatUtils.format(new Date(), "yyyy-MM-dd_HH-mm-ss") + random.nextInt(10) + ".xls";
+        File file = new File(dir, filename);
+
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        // 创建通用样式
+        HSSFCellStyle titleCellStyle = workbook.createCellStyle();
+        HSSFFont titleFont = workbook.createFont();
+        titleFont.setFontName("微软雅黑");
+        titleFont.setBold(false);
+        titleFont.setFontHeightInPoints((short) 20);
+        titleCellStyle.setFont(titleFont);
+        titleCellStyle.setBorderLeft(BorderStyle.THIN);
+        titleCellStyle.setBorderRight(BorderStyle.THIN);
+        titleCellStyle.setBorderTop(BorderStyle.THIN);
+        titleCellStyle.setBorderBottom(BorderStyle.THIN);
+        titleCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        titleCellStyle.setFillForegroundColor(HSSFColor.HSSFColorPredefined.CORAL.getIndex());
+
+
+        HSSFCellStyle simpleCellStyle = workbook.createCellStyle();
+        simpleCellStyle.setBorderLeft(BorderStyle.THIN);
+        simpleCellStyle.setBorderRight(BorderStyle.THIN);
+        simpleCellStyle.setBorderTop(BorderStyle.THIN);
+        simpleCellStyle.setBorderBottom(BorderStyle.THIN);
+
+        HSSFFont simpleFont = workbook.createFont();
+        simpleFont.setFontName("微软雅黑");
+        simpleFont.setFontHeightInPoints((short) 16);
+        simpleCellStyle.setFont(simpleFont);
+
         // 创建超链接样式
-        linkCellStyle = getLinkCellStyle();
-        //
-        createHelper = workbook.getCreationHelper();
+        HSSFCellStyle linkCellStyle = workbook.createCellStyle();
+        linkCellStyle.setBorderLeft(BorderStyle.THIN);
+        linkCellStyle.setBorderRight(BorderStyle.THIN);
+        linkCellStyle.setBorderTop(BorderStyle.THIN);
+        linkCellStyle.setBorderBottom(BorderStyle.THIN);
+        HSSFFont linkFont = workbook.createFont();
+        linkFont.setFontName("YAHEI");
+        linkFont.setFontHeightInPoints((short) 16);
+        linkFont.setItalic(true);
+        linkCellStyle.setFont(linkFont);
+
+        CreationHelper createHelper = workbook.getCreationHelper();
         // 创建目录sheet
-        HSSFSheet indexSheet = createIndexSheet(indexName);
+        String indexSheetName = "目录";
+        HSSFSheet indexSheet = workbook.createSheet(indexSheetName);
+        indexSheet.setActive(true);
+        indexSheet.setDefaultColumnWidth(40);
+        // 创建数据库名称row
+        HSSFRow dbNameRow = indexSheet.createRow(0);
+        createCell(0, dbNameRow, "数据库名称:" + databaseName, simpleCellStyle);
+
+        HSSFRow tablesRow = indexSheet.createRow(2);
+        createCell(0, tablesRow, "表", simpleCellStyle);
         // 创建返回目录sheet的超链接
         Hyperlink toIndexLink = createHelper.createHyperlink(HyperlinkType.DOCUMENT);
-        toIndexLink.setAddress(String.format("'%s'!A1", indexName));
+        toIndexLink.setAddress(String.format("'%s'!A1", indexSheetName));
 
         // 创建各种表格sheet
         for (int i = 0; i < tableInfos.size(); i++) {
@@ -145,97 +171,6 @@ public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImp
         workbook.write(exportXls);
         workbook.close();
         exportXls.close();
-
-    }
-
-    /***
-     * 创建文件
-     * @return
-     * @throws IOException
-     */
-    private File createFile() throws IOException {
-        String databaseName = dbInfoDao.databaseName();
-        File dir = new File(generatorConfig.getTargetFileDir());
-        FileUtils.forceMkdir(dir);
-        Random random = new Random();
-        String filename = databaseName + "_" + DateFormatUtils.format(new Date(), "yyyy-MM-dd_HH-mm-ss") + random.nextInt(10) + ".xls";
-        File file = new File(dir, filename);
-        return file;
-    }
-
-    /***
-     * 创建标题样式
-     * @param workbook
-     * @return
-     */
-    private HSSFCellStyle getTitleCellStyle() {
-        HSSFCellStyle titleCellStyle = workbook.createCellStyle();
-        HSSFFont titleFont = workbook.createFont();
-        titleFont.setFontName("微软雅黑");
-        titleFont.setBold(false);
-        titleFont.setFontHeightInPoints((short) 20);
-        titleCellStyle.setFont(titleFont);
-        titleCellStyle.setBorderLeft(BorderStyle.THIN);
-        titleCellStyle.setBorderRight(BorderStyle.THIN);
-        titleCellStyle.setBorderTop(BorderStyle.THIN);
-        titleCellStyle.setBorderBottom(BorderStyle.THIN);
-        titleCellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
-        titleCellStyle.setFillForegroundColor(HSSFColor.HSSFColorPredefined.CORAL.getIndex());
-        return titleCellStyle;
-    }
-
-    /***
-     * 创建一般样式
-     * @return
-     */
-    private HSSFCellStyle getSimpleCellStyle() {
-        HSSFCellStyle simpleCellStyle = workbook.createCellStyle();
-        simpleCellStyle.setBorderLeft(BorderStyle.THIN);
-        simpleCellStyle.setBorderRight(BorderStyle.THIN);
-        simpleCellStyle.setBorderTop(BorderStyle.THIN);
-        simpleCellStyle.setBorderBottom(BorderStyle.THIN);
-
-        HSSFFont simpleFont = workbook.createFont();
-        simpleFont.setFontName("微软雅黑");
-        simpleFont.setFontHeightInPoints((short) 16);
-        simpleCellStyle.setFont(simpleFont);
-        return simpleCellStyle;
-    }
-
-    /***
-     * 创建超链接样式
-     * @param workbook
-     * @return
-     */
-    private HSSFCellStyle getLinkCellStyle() {
-        HSSFCellStyle linkCellStyle = workbook.createCellStyle();
-        linkCellStyle.setBorderLeft(BorderStyle.THIN);
-        linkCellStyle.setBorderRight(BorderStyle.THIN);
-        linkCellStyle.setBorderTop(BorderStyle.THIN);
-        linkCellStyle.setBorderBottom(BorderStyle.THIN);
-        HSSFFont linkFont = workbook.createFont();
-        linkFont.setFontName("YAHEI");
-        linkFont.setFontHeightInPoints((short) 16);
-        linkFont.setItalic(true);
-        linkCellStyle.setFont(linkFont);
-        return linkCellStyle;
-    }
-
-    /***
-     * 创建目录sheet
-     * @return
-     * @param indexName
-     */
-    private HSSFSheet createIndexSheet(String indexName) {
-        String databaseName = dbInfoDao.databaseName();
-        HSSFSheet indexSheet = workbook.createSheet(indexName);
-        indexSheet.setActive(true);
-        indexSheet.setDefaultColumnWidth(40);
-        // 创建数据库名称row
-        HSSFRow dbNameRow = indexSheet.createRow(0);
-        createCell(0, dbNameRow, "数据库名称:" + databaseName, simpleCellStyle);
-
-        return indexSheet;
     }
 
     /***
