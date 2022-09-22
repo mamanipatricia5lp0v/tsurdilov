@@ -34,11 +34,7 @@ public final class HtmlGeneratorServiceImpl extends AbstractGeneratorServiceImpl
 		templateFileName = StringUtils.defaultIfBlank(generatorConfig.getTemplateFilePath(), templateFileName);
 		// 获取模板
 		Template template = FreemarkerUtils.getTemplate(templateFileName);
-		File dir = new File(generatorConfig.getTargetFileDir());
-		FileUtils.forceMkdir(dir);
-		Random random = new Random();
-		String filename = DateFormatUtils.format(new Date(), "yyyy-MM-dd_hh-mm-ss") + random.nextInt(10) + ".html";
-		File file = new File(dir, filename);
+		File file = this.createFile("html");
 		Map<String, Object> map = new HashMap<>(2);
 		map.put("tableInfos", tableInfos);
 		map.put("databaseName", databaseName);

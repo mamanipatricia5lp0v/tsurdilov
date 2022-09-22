@@ -3,8 +3,6 @@ package cn.wuwenyao.db.doc.generator.service.impl;
 import cn.wuwenyao.db.doc.generator.entity.TableFieldInfo;
 import cn.wuwenyao.db.doc.generator.entity.TableInfo;
 import cn.wuwenyao.db.doc.generator.entity.TableKeyInfo;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.poi.common.usermodel.HyperlinkType;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
@@ -12,9 +10,7 @@ import org.apache.poi.ss.usermodel.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 /***
  * 生成文档服务-excel实现
@@ -105,11 +101,7 @@ public final class ExcelGeneratorServiceImpl extends AbstractGeneratorServiceImp
         String databaseName = dbInfoDao.databaseName();
         List<TableInfo> tableInfos = dbInfoDao.tableInfoList();
         // 生成文件
-        File dir = new File(generatorConfig.getTargetFileDir());
-        FileUtils.forceMkdir(dir);
-        Random random = new Random();
-        String filename = databaseName + "_" + DateFormatUtils.format(new Date(), "yyyy-MM-dd_HH-mm-ss") + random.nextInt(10) + ".xls";
-        File file = new File(dir, filename);
+        File file = createFile("xls");
         // 初始化样式
         initCellStyle();
         // 创建目录sheet
