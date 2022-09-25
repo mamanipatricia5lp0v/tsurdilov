@@ -39,7 +39,11 @@ public abstract class AbstractGeneratorServiceImpl implements GeneratorService {
      */
     private void openDir() throws IOException {
         // 弹出目标文件夹
-        Runtime.getRuntime().exec("explorer " + generatorConfig.getTargetFileDir());
+        String os = System.getProperty("os.name");
+        if (os.toLowerCase().startsWith("win")) {
+            Runtime.getRuntime().exec("explorer " + generatorConfig.getTargetFileDir());
+        }
+
     }
 
     /***
