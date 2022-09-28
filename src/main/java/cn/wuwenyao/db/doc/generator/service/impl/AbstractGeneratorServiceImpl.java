@@ -23,10 +23,6 @@ public abstract class AbstractGeneratorServiceImpl implements GeneratorService {
 
     protected GeneratorConfig generatorConfig;
 
-    @Override
-    public void generateDbDoc() throws Exception {
-
-    }
 
     @Override
     public void generate() throws Exception {
