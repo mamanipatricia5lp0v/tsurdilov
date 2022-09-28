@@ -5,7 +5,6 @@ import cn.wuwenyao.db.doc.generator.entity.TableInfo;
 import cn.wuwenyao.db.doc.generator.entity.TableKeyInfo;
 import org.apache.commons.collections4.CollectionUtils;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.ColumnMapRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -19,6 +18,8 @@ import java.util.Map;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 /***
  * 获取mysql数据库信息
  *
@@ -29,7 +30,7 @@ import java.util.stream.Collectors;
 public final class MysqlDbInfoDao extends AbstractDbInfoDao {
 
 
-    private static final Logger logger = LoggerFactory.getLogger(MysqlDbInfoDao.class);
+    private static final Logger logger = getLogger(MysqlDbInfoDao.class);
 
     @Override
     public String databaseName() {
@@ -54,7 +55,7 @@ public final class MysqlDbInfoDao extends AbstractDbInfoDao {
         CountDownLatch countDownLatch = new CountDownLatch(tableInfos.size());
         ExecutorService executor = new ThreadPoolExecutor(10, 10,
                 0L, TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<Runnable>());
+                new LinkedBlockingQueue<Runnable>(tableInfos.size()));
         tableInfos.stream().forEach((tableInfo) -> {
             executor.execute(new GetTableInfoTask(tableInfo, countDownLatch, jdbcTemplate));
         });
@@ -72,6 +73,7 @@ public final class MysqlDbInfoDao extends AbstractDbInfoDao {
      */
     public static class GetTableInfoTask implements Runnable {
 
+        private static final Logger logger = getLogger(GetTableInfoTask.class);
 
         private TableInfo tableInfo;
 
@@ -88,40 +90,46 @@ public final class MysqlDbInfoDao extends AbstractDbInfoDao {
 
         @Override
         public void run() {
-            Object[] params = new Object[]{tableInfo.getTableName()};
-            //查询列信息
-            List<TableFieldInfo> fields = jdbcTemplate.query(
-                    "select COLUMN_NAME, COLUMN_COMMENT,COLUMN_DEFAULT,IS_NULLABLE,COLUMN_TYPE,COLUMN_KEY,EXTRA from information_schema.columns where table_schema =database() and table_name = ?",
-                    params, new TableFieldInfoRowMapper());
-            tableInfo.setFields(fields);
-            //查询索引信息
-            List<Map<String, Object>> rawKeyInfos = jdbcTemplate.query("show keys from " + tableInfo.getTableName(),
-                    new ColumnMapRowMapper());
+            try {
+                Object[] params = new Object[]{tableInfo.getTableName()};
+                //查询列信息
+                List<TableFieldInfo> fields = jdbcTemplate.query(
+                        "select COLUMN_NAME, COLUMN_COMMENT,COLUMN_DEFAULT,IS_NULLABLE,COLUMN_TYPE,COLUMN_KEY,EXTRA from information_schema.columns where table_schema =database() and table_name = ?",
+                        params, new TableFieldInfoRowMapper());
+                tableInfo.setFields(fields);
+                //查询索引信息
+                List<Map<String, Object>> rawKeyInfos = jdbcTemplate.query("show keys from " + tableInfo.getTableName(),
+                        new ColumnMapRowMapper());
 
-            Map<String, TableKeyInfo> keyMap = new HashMap<>(5);
-            for (Map<String, Object> rawKeyInfo : rawKeyInfos) {
-                TableKeyInfo tableKeyInfo = keyMap.get(rawKeyInfo.get("Key_name").toString());
-                String columnName = rawKeyInfo.get("Column_name").toString();
-                if (tableKeyInfo == null) {
-                    tableKeyInfo = new TableKeyInfo();
-                    ArrayList<String> columns = new ArrayList<>();
-                    columns.add(columnName);
-                    tableKeyInfo.setColumns(columns);
-                    tableKeyInfo.setIndexComment(rawKeyInfo.get("Index_comment").toString());
-                    tableKeyInfo.setIndexType(rawKeyInfo.get("Index_type").toString());
-                    tableKeyInfo.setName(rawKeyInfo.get("Key_name").toString());
-                    tableKeyInfo.setUnique(rawKeyInfo.get("Non_unique").toString().equals("0"));
-                } else {
-                    tableKeyInfo.getColumns().add(columnName);
+                Map<String, TableKeyInfo> keyMap = new HashMap<>(5);
+                for (Map<String, Object> rawKeyInfo : rawKeyInfos) {
+                    TableKeyInfo tableKeyInfo = keyMap.get(rawKeyInfo.get("Key_name").toString());
+                    String columnName = rawKeyInfo.get("Column_name").toString();
+                    if (tableKeyInfo == null) {
+                        tableKeyInfo = new TableKeyInfo();
+                        ArrayList<String> columns = new ArrayList<>();
+                        columns.add(columnName);
+                        tableKeyInfo.setColumns(columns);
+                        tableKeyInfo.setIndexComment(rawKeyInfo.get("Index_comment").toString());
+                        tableKeyInfo.setIndexType(rawKeyInfo.get("Index_type").toString());
+                        tableKeyInfo.setName(rawKeyInfo.get("Key_name").toString());
+                        tableKeyInfo.setUnique(rawKeyInfo.get("Non_unique").toString().equals("0"));
+                    } else {
+                        tableKeyInfo.getColumns().add(columnName);
+                    }
+                    keyMap.put(rawKeyInfo.get("Key_name").toString(), tableKeyInfo);
                 }
-                keyMap.put(rawKeyInfo.get("Key_name").toString(), tableKeyInfo);
+                //索引信息进行排序
+                List<TableKeyInfo> tableKeyInfoList = new ArrayList<>(keyMap.values());
+                tableKeyInfoList.sort(null);
+                tableInfo.setKeys(tableKeyInfoList);
+                logger.info("表：{}信息查询完毕", tableInfo.getTableName());
+            } catch (Exception e) {
+                logger.error("任务-获取表信息-异常", e);
+            } finally {
+                countDownLatch.countDown();
             }
-            //索引信息进行排序
-            List<TableKeyInfo> tableKeyInfoList = new ArrayList<>(keyMap.values());
-            tableKeyInfoList.sort(null);
-            tableInfo.setKeys(tableKeyInfoList);
-            logger.info("表：{}信息查询完毕", tableInfo.getTableName());
-            countDownLatch.countDown();
+
         }
 
     }

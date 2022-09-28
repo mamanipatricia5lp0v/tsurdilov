@@ -36,7 +36,7 @@
 	</head>
 
 	<body>
-		<!-- 目录开始 -->
+		<!-- 目录 -->
 		<h1 id="top" class="ui center aligned header ">数据库名称：${databaseName}</h1>
 		
 		<div  class="ui text container last db-index">
@@ -62,8 +62,8 @@
 			
 		</div>
 		
-		<!--目录结束-->
-		<!--表说明开始-->
+		<!--/目录-->
+		<!--表-->
 		<#list tableInfos as tableInfo>
 		<div id="db-table-${tableInfo_index}" style="display: none" class="ui container last db-table ">
 			<h1 class="ui center aligned header">表名:${tableInfo.tableName}</h3>
@@ -130,7 +130,7 @@
 			</table>
 		</div>
 		</#list>
-		
+		<!-- /表 -->
 
 		<script type="text/javascript">
 			
